@@ -68,8 +68,8 @@ def compute_total_token_count(sentences_old):
     return total_count
 
 
-# 构建旧的单个句子的token的position到分割后的新的句子id，当前句子的position之间的映射。
-# 例如，旧句子100，分成十个。那么在新句子中，55号token的位置就是,[5, 4]，第六个句子的第5个位置。
+# Construct a mapping of the position for the tokens and sentence ids between the new and old sentences, after the split.
+# For example, the old sentence 100, split into ten. Then in the new sentence, the position of token 55 is ,[5, 4], the 5th position of the sixth sentence.
 def find_new_sent_idx(total_sent_nums_new, search_token_id, new_sent_idx=None, new_token_id=None):
     cur_total_token_count = 0
     cur_total_sent_count = 0
