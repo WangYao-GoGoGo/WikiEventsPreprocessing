@@ -204,7 +204,7 @@ def build_new_sentencess(new_sentences, new_triggers, arguments_new, doc_id):
     return doc_sentences
 
 
-def docs2sen(docs, dataset_name):
+def docs2sen(docs, dataset_name, chunk_size):
     docs_sentences = []
 
     for doc in docs:
@@ -219,7 +219,7 @@ def docs2sen(docs, dataset_name):
             sentence_idx_nums_old[idx] = len(tokens[0])
         total_token_count = compute_total_token_count(sentences_old)
 
-        sentences_new, bep_sents, total_sent_nums_new = split_sentences(sentences_old, 300)
+        sentences_new, bep_sents, total_sent_nums_new = split_sentences(sentences_old, chunk_size)
         old2new_map = map_old_po_to_new(total_token_count, total_sent_nums_new)
         enid_eninfo = build_ent_info(entity_mentions, old2new_map)
         new_triggers, arguments_new = build_new_arguments(event_mentions, old2new_map, enid_eninfo)
@@ -254,4 +254,4 @@ if __name__ == '__main__':
     datasets = {"train": train_data, "dev": dev_data, "test": test_data}
     for dataset_name in datasets.keys():
         dataset = datasets.get(dataset_name)
-        docs2sen(dataset, dataset_name)
+        docs2sen(dataset, dataset_name, 300)
